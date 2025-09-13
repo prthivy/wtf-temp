@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What The Fudge!? - Handcrafted Fudge Delights</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <script>
+        // Custom Tailwind configuration to add the company's color palette
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dark-brown': '#4E342E',
+                        'creamy-bg': '#FFF8E7',
+                        'caramel-accent': '#D4A373',
+                        'maroon-heading': '#5C1A1B',
+                    },
+                    fontFamily: {
+                        'serif': ['Playfair Display', 'serif'],
+                        'sans': ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles for the scroll-in animation */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Style for active navigation link */
+        .nav-link.active {
+            color: #D4A373; /* caramel-accent */
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        /* Custom styles for location widget */
+        #location-tooltip {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-50%) translateX(8px);
+            transition: all 0.3s ease-in-out;
+            pointer-events: none;
+        }
+
+        .group:hover #location-tooltip,
+        .group.is-open #location-tooltip {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(-50%) translateX(0);
+            pointer-events: auto;
+        }
+
+        /* Keyframes for the glowing effect */
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 10px rgba(212, 163, 115, 0.6); /* caramel-accent with opacity */
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(212, 163, 115, 0.9);
+            }
+        }
+
+        .glowing-icon {
+            animation: glow 2.5s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-creamy-bg text-dark-brown font-sans">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-dark-brown text-creamy-bg sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <a href="#" class="font-serif text-2xl text-caramel-accent nav-link" data-page="home">What The Fudge!?</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#" class="hover:text-caramel-accent transition-colors duration-300 nav-link active" data-page="home">Home</a>
+                <a href="#" class="hover:text-caramel-accent transition-colors duration-300 nav-link" data-page="about">About Us</a>
+                <a href="#" class="hover:text-caramel-accent transition-colors duration-300 nav-link" data-page="contact">Contact Us</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-creamy-bg focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#" class="block py-2 px-4 text-sm hover:bg-maroon-heading nav-link active" data-page="home">Home</a>
+            <a href="#" class="block py-2 px-4 text-sm hover:bg-maroon-heading nav-link" data-page="about">About Us</a>
+            <a href="#" class="block py-2 px-4 text-sm hover:bg-maroon-heading nav-link" data-page="contact">Contact Us</a>
+        </div>
+    </nav>
+
+
+    <!-- Page Content -->
+    <div id="page-content">
+        <!-- Home Page Content -->
+        <div id="home" class="page">
+            <!-- 
+                EDIT THIS SECTION:
+                Replace the URL in 'background-image: url(...)' below with the URL of your dark chocolate image.
+                I've used a placeholder that simulates a dark, rich texture. I've also added a subtle
+                dark overlay to ensure the text is easy to read.
+            -->
+            <header 
+                class="py-24 md:py-32 text-center relative bg-cover bg-center" 
+                style="background-image: url('./assets/bg1.jpg');">
+                
+                <!-- This div creates a dark overlay for better text readability -->
+                <div class="absolute inset-0 bg-black opacity-40"></div>
+                
+                <!-- Content container, positioned above the overlay -->
+                <div class="relative z-10 px-4">
+                    <h1 class="font-serif text-5xl md:text-7xl font-bold text-creamy-bg">What The Fudge!?</h1>
+                    <p class="mt-4 text-lg md:text-xl text-creamy-bg max-w-2xl mx-auto">Handcrafted, semi-solid fudge that makes you say... well, you know.</p>
+                </div>
+            </header>
+
+            <main class="container mx-auto px-6 lg:px-8 pb-20 pt-20">
+                <div class="space-y-24 md:space-y-32">
+                    <!-- Block 1 -->
+                    <section class="scroll-reveal grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+                        <div class="w-full h-80 rounded-lg bg-gray-200"><img src="https://placehold.co/600x400/D4A373/4E342E?text=Classic+Chocolate" alt="Placeholder image for classic chocolate fudge" class="w-full h-full object-cover rounded-lg shadow-xl"></div>
+                        <div class="text-center md:text-left"><h2 class="font-serif text-3xl font-bold text-maroon-heading mb-4">The Original Sin</h2><p class="text-base leading-relaxed">Our journey began with a timeless classic. Rich, dark chocolate, melted to perfection and blended with fresh cream and butter. It's the fudgiest fudge you'll ever fudge, setting the bar for everything that followed. A true original.</p></div>
+                    </section>
+                    <!-- Block 2 -->
+                    <section class="scroll-reveal grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+                        <div class="text-center md:text-left md:order-1"><h2 class="font-serif text-3xl font-bold text-maroon-heading mb-4">Salted Caramel Seduction</h2><p class="text-base leading-relaxed">Experience the perfect dance of sweet and savory. We swirl our creamy caramel fudge with flakes of gourmet sea salt. Each bite is a delightful surprise, a flavor explosion that will keep you coming back for just one more piece.</p></div>
+                        <div class="w-full h-80 rounded-lg bg-gray-200 md:order-2"><img src="https://placehold.co/600x400/4E342E/FFF8E7?text=Salted+Caramel" alt="Placeholder image for salted caramel fudge" class="w-full h-full object-cover rounded-lg shadow-xl"></div>
+                    </section>
+                    <!-- Block 3 -->
+                    <section class="scroll-reveal grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+                        <div class="w-full h-80 rounded-lg bg-gray-200"><img src="https://placehold.co/600x400/D4A373/4E342E?text=Peanut+Butter" alt="Placeholder image for peanut butter fudge" class="w-full h-full object-cover rounded-lg shadow-xl"></div>
+                        <div class="text-center md:text-left"><h2 class="font-serif text-3xl font-bold text-maroon-heading mb-4">Peanut Butter Panic</h2><p class="text-base leading-relaxed">For the nut lovers, we present a creation that's pure bliss. We take creamy, dreamy peanut butter and whip it into our signature fudge base. It's nutty, it's smooth, and it's dangerously delicious. Don't panic, there's plenty to go around.</p></div>
+                    </section>
+                    <!-- Block 4 -->
+                    <section class="scroll-reveal grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+                        <div class="text-center md:text-left md:order-1"><h2 class="font-serif text-3xl font-bold text-maroon-heading mb-4">White Chocolate Raspberry</h2><p class="text-base leading-relaxed">Elegance in a bite. We blend decadent white chocolate with a tart raspberry swirl, creating a flavor profile that is both sophisticated and irresistible. It's a fruity, creamy delight that looks as good as it tastes.</p></div>
+                        <div class="w-full h-80 rounded-lg bg-gray-200 md:order-2"><img src="https://placehold.co/600x400/4E342E/FFF8E7?text=Raspberry+Swirl" alt="Placeholder image for raspberry swirl fudge" class="w-full h-full object-cover rounded-lg shadow-xl"></div>
+                    </section>
+                    <!-- Block 5 -->
+                    <section class="scroll-reveal grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+                        <div class="w-full h-80 rounded-lg bg-gray-200"><img src="https://placehold.co/600x400/D4A373/4E342E?text=Espresso+Bean" alt="Placeholder image for espresso bean fudge" class="w-full h-full object-cover rounded-lg shadow-xl"></div>
+                        <div class="text-center md:text-left"><h2 class="font-serif text-3xl font-bold text-maroon-heading mb-4">Espresso Shot Shock</h2><p class="text-base leading-relaxed">Get your buzz on with our coffee-infused creation. We fold finely ground espresso beans into our dark chocolate fudge for a rich, aromatic experience that will awaken your senses. It's the perfect pick-me-up for any time of day.</p></div>
+                    </section>
+                    <!-- Block 6 -->
+                    <section class="scroll-reveal grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+                        <div class="text-center md:text-left md:order-1"><h2 class="font-serif text-3xl font-bold text-maroon-heading mb-4">Mint Chocolate Mayhem</h2><p class="text-base leading-relaxed">A refreshing classic with a decadent twist. Cool, crisp mint is perfectly balanced with our rich dark chocolate fudge. It's an invigorating and satisfying treat that cleanses the palate while indulging your sweet tooth.</p></div>
+                        <div class="w-full h-80 rounded-lg bg-gray-200 md:order-2"><img src="https://placehold.co/600x400/4E342E/FFF8E7?text=Mint+Chocolate" alt="Placeholder image for mint chocolate fudge" class="w-full h-full object-cover rounded-lg shadow-xl"></div>
+                    </section>
+                </div>
+            </main>
+        </div>
+
+        <!-- About Us Page Content -->
+        <div id="about" class="page hidden">
+            <main class="container mx-auto px-6 lg:px-8 py-16">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h1 class="font-serif text-5xl font-bold text-maroon-heading">Our Story</h1>
+                    <p class="mt-4 text-lg text-dark-brown">It all started in a small kitchen with a big mess.</p>
+                    <img src="https://placehold.co/800x400/D4A373/4E342E?text=Our+Kitchen" alt="Placeholder image of a kitchen" class="w-full h-auto object-cover rounded-lg shadow-xl my-8">
+                    <div class="text-left space-y-4 text-base leading-relaxed">
+                        <p>What The Fudge!? was born from a simple, yet profound, question: "Why is it so hard to find truly great fudge?" We were tired of the grainy, overly-sweet stuff. We craved fudge that was smooth, rich, and made with ingredients you could actually pronounce.</p>
+                        <p>So, we took matters into our own hands. After countless hours of testing, tasting, and tweaking (and a few moments that made us say... well, you know), we perfected our recipes. We use real butter, fresh cream, premium chocolate, and a whole lot of love. No shortcuts, no compromises.</p>
+                        <p>We're a small team with a big passion for confectionery perfection. Every batch is handcrafted and taste-tested to ensure it meets our ridiculously high standards. We believe fudge shouldn't just be a treat; it should be an experience. Thanks for being part of our sweet journey.</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Contact Us Page Content -->
+        <div id="contact" class="page hidden">
+            <main class="container mx-auto px-6 lg:px-8 py-16">
+                <div class="max-w-2xl mx-auto">
+                    <div class="text-center">
+                        <h1 class="font-serif text-5xl font-bold text-maroon-heading">Get In Touch</h1>
+                        <p class="mt-4 text-lg text-dark-brown">Have a question, a special request, or just want to talk fudge? We'd love to hear from you!</p>
+                    </div>
+                    <form class="mt-12 bg-white/40 p-8 rounded-lg shadow-lg space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-dark-brown">Full Name</label>
+                            <input type="text" id="name" name="name" class="mt-1 block w-full px-3 py-2 bg-creamy-bg border border-caramel-accent rounded-md shadow-sm focus:outline-none focus:ring-maroon-heading focus:border-maroon-heading">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-dark-brown">Email Address</label>
+                            <input type="email" id="email" name="email" class="mt-1 block w-full px-3 py-2 bg-creamy-bg border border-caramel-accent rounded-md shadow-sm focus:outline-none focus:ring-maroon-heading focus:border-maroon-heading">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-dark-brown">Message</label>
+                            <textarea id="message" name="message" rows="4" class="mt-1 block w-full px-3 py-2 bg-creamy-bg border border-caramel-accent rounded-md shadow-sm focus:outline-none focus:ring-maroon-heading focus:border-maroon-heading"></textarea>
+                        </div>
+                        <div>
+                            <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-creamy-bg bg-maroon-heading hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-maroon-heading transition-colors">
+                                Send Message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Location Hover Widget -->
+    <div id="location-widget" class="fixed top-1/2 right-5 z-50 -translate-y-1/2 group">
+        <div class="bg-dark-brown p-3 rounded-full shadow-lg cursor-pointer glowing-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-creamy-bg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+        </div>
+        <div id="location-tooltip" class="absolute top-1/2 right-full mr-4 -translate-y-1/2 w-max bg-dark-brown text-creamy-bg p-4 rounded-lg shadow-lg">
+            <p class="text-sm text-caramel-accent">Now opening in:</p>
+            <p class="font-serif text-xl font-bold whitespace-nowrap">Nagpur, Maharashtra</p>
+            <!-- Tooltip Arrow -->
+            <div class="absolute left-full top-1/2 -translate-y-1/2 ml-[-12px] border-8 border-transparent border-l-dark-brown"></div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="bg-dark-brown text-creamy-bg text-center py-10">
+        <p class="font-serif text-2xl text-caramel-accent mb-2">What The Fudge!?</p>
+        <p>&copy; 2025 - All Rights Reserved. Made with ❤️ and all things sweet.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Page Navigation Logic ---
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+
+            const switchPage = (pageId) => {
+                // Hide all pages
+                pages.forEach(page => {
+                    page.classList.add('hidden');
+                });
+
+                // Show the target page
+                const targetPage = document.getElementById(pageId);
+                if (targetPage) {
+                    targetPage.classList.remove('hidden');
+                }
+
+                // Update active link style
+                navLinks.forEach(link => {
+                    link.classList.toggle('active', link.dataset.page === pageId);
+                });
+
+                // Hide mobile menu after selection
+                mobileMenu.classList.add('hidden');
+                window.scrollTo(0, 0); // Scroll to top on page change
+            };
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const pageId = link.dataset.page;
+                    switchPage(pageId);
+                });
+            });
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+
+            // --- Scroll Reveal Logic ---
+            const animatedElements = document.querySelectorAll('.scroll-reveal');
+
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                animatedElements.forEach(el => {
+                    observer.observe(el);
+                });
+            } else {
+                // Fallback for older browsers
+                animatedElements.forEach(el => el.classList.add('visible'));
+            }
+
+            // --- Location Widget Logic ---
+            const locationWidget = document.getElementById('location-widget');
+
+            if (locationWidget) {
+                // Show the tooltip for 4 seconds on page load
+                setTimeout(() => {
+                    locationWidget.classList.add('is-open');
+                }, 500); // 0.5s delay before showing
+
+                // Hide the tooltip after the initial 4-second display
+                setTimeout(() => {
+                    locationWidget.classList.remove('is-open');
+                }, 4500); // Remove after 4 seconds of being visible
+            }
+        });
+    </script>
+</body>
+</html>
+
